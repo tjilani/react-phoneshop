@@ -157,19 +157,35 @@ class ProductProvider extends Component {
   };
 
   addToCart = id => {
-    let tempProducts = [...this.state.products];
-    const index = tempProducts.indexOf(this.getItem(id));
-    const product = tempProducts[index];
+    // let tempProducts = [...this.state.products];
+    // const index = tempProducts.indexOf(this.getItem(id));
+    // const product = tempProducts[index];
+    // product.inCart = true;
+    // product.count = 1;
+    // const price = product.price;
+    // product.total = price;
+
+    // this.setState(
+    //   () => {
+    //     return {
+    //       products: tempProducts,
+    //       cartList: [...this.state.cartList, product]
+    //     };
+    //   },
+    //   () => this.addTotals()
+    // );
+
+    const tempProducts = [...this.state.products];
+    const product = tempProducts.find(item => item.id === id);
     product.inCart = true;
     product.count = 1;
-    const price = product.price;
-    product.total = price;
+    product.total = product.price;
 
     this.setState(
       () => {
         return {
-          products: tempProducts,
-          cartList: [...this.state.cartList, product]
+          cartList: [...this.state.cartList, product],
+          products: tempProducts
         };
       },
       () => this.addTotals()
